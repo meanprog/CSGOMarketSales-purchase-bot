@@ -4,9 +4,9 @@ import openpyxl
 
 
 
-apiKey = "" #апи ключ
-dateStart = "26-09-2023" #начальная дата
-dateEnd = "11-11-2023" #конечная дата
+apiKey = "Bq5rziUqFnsxEY4mK1A6Tj52vAxWk18" #апи ключ
+dateStart = "01-02-2024" #начальная дата
+dateEnd = "09-03-2024" #конечная дата
 date_time_Start = datetime.datetime.strptime(dateStart, '%d-%m-%Y')
 date_time_End = datetime.datetime.strptime(dateEnd, '%d-%m-%Y')
 
@@ -24,7 +24,11 @@ try:
         params['date'] = str(date_time_Start.date().strftime('%d-%m-%Y'))
         #делаем запрос
         response = requests.get("https://market.csgo.com/api/v2/history?", params=params)
+        print(response.status_code)
+        while(response.status_code != 200):
+            response = requests.get("https://market.csgo.com/api/v2/history?", params=params)
         #получаем json
+
         dataMarket = response.json()
 
         #добавляем в массив куплено элементы из json
@@ -73,6 +77,12 @@ try:
             sheet[row][5].value = int(item[7])/100
             sum += int(item[7])/100
             row += 1
+        # elif 0 <= 3 < len(item):
+        #     if ((item[3] == 'buy')):
+        #         sheet[row][0].value = str(item[0].date().strftime('%d.%m.%Y'))
+        #         sheet[row][2].value = str(item[1])
+        #         sheet[row][3].value = int(item[2]) / 100
+        #         row += 1
     sheet[row][0].value = "Итог: " + str(sum)
     book.save("BuySell.xlsx")
     book.close()
