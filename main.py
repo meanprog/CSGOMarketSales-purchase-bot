@@ -4,16 +4,16 @@ import openpyxl
 
 
 
-apiKey = "Bq5rziUqFnsxEY4mK1A6Tj52vAxWk18" #апи ключ
-dateStart = "01-02-2024" #начальная дата
-dateEnd = "09-03-2024" #конечная дата
+apiKey = "key" #апи ключ
+dateStart = "27-09-2023" #начальная дата
+dateEnd = "18-03-2024" #конечная дата
 date_time_Start = datetime.datetime.strptime(dateStart, '%d-%m-%Y')
 date_time_End = datetime.datetime.strptime(dateEnd, '%d-%m-%Y')
 
 buy = [] #куплено/продано
-
-
 params = {"key" : apiKey} # параметры
+
+
 
 try:
     while(date_time_Start <= date_time_End):
@@ -49,7 +49,9 @@ try:
                 i.append(j[2])
                 i.append(int(i[6])-int(i[2]))
                 buy.remove(j)
+                break
 
+    #print(buy)
 
 
     #массив хранит информацию и о нереализованных товарах, чтобы получить полный отчёт нужно отредактировать if в условиях вывода
