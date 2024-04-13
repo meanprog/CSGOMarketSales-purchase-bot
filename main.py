@@ -4,9 +4,9 @@ import openpyxl
 
 
 
-apiKey = "key" #апи ключ
-dateStart = "31-12-2023" #начальная дата
-dateEnd = "03-04-2024" #конечная дата
+apiKey = "Zzz" #апи ключ
+dateStart = "27-09-2023" #начальная дата
+dateEnd = "13-04-2024" #конечная дата
 date_time_Start = datetime.datetime.strptime(dateStart, '%d-%m-%Y')
 date_time_End = datetime.datetime.strptime(dateEnd, '%d-%m-%Y')
 
@@ -19,7 +19,7 @@ try:
     while(date_time_Start <= date_time_End):
         print(date_time_Start)
         #увеличиваем день
-        date_time_Start += datetime.timedelta(days=1)
+        #date_time_Start += datetime.timedelta(days=1)
         #меняем ключ в параметрах к запросу
         params['date'] = str(date_time_Start.date().strftime('%d-%m-%Y'))
         #делаем запрос
@@ -39,6 +39,7 @@ try:
                 elif(str(item['event']) == 'buy'):
                     buy.append([date_time_Start, item['market_hash_name'], item['paid'],  item['event']])
 
+        date_time_Start += datetime.timedelta(days=1)
 
     #проходим по массиву и ищем одинаковые элементы, но с разными ивентами
     for i in buy:
@@ -49,6 +50,7 @@ try:
                 i.append(j[2])
                 i.append(int(i[6])-int(i[2]))
                 buy.remove(j)
+                #print(i)
                 break
 
     #print(buy)
