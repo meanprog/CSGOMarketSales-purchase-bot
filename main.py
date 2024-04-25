@@ -4,9 +4,9 @@ import openpyxl
 
 
 
-apiKey = "Zzz" #апи ключ
-dateStart = "27-09-2023" #начальная дата
-dateEnd = "13-04-2024" #конечная дата
+apiKey = "05Rv7xd2JNdM954Pd3jcTIK6FHS8NNc" #апи ключ
+dateStart = "01-04-2024" #начальная дата
+dateEnd = "24-04-2024" #конечная дата
 date_time_Start = datetime.datetime.strptime(dateStart, '%d-%m-%Y')
 date_time_End = datetime.datetime.strptime(dateEnd, '%d-%m-%Y')
 
@@ -44,7 +44,7 @@ try:
     #проходим по массиву и ищем одинаковые элементы, но с разными ивентами
     for i in buy:
         for j in buy:
-            if i[1] == j[1] and i[3] == "buy" and j[3] == "sell" and 0 <= 3 < len(i) and (j[0] >= i[0] + datetime.timedelta(days=8)):
+            if i[1] == j[1] and i[3] == "buy" and j[3] == "sell" and 0 <= 3 < len(i) and (j[0] >= i[0] + datetime.timedelta(days=7)):
                 i.append(j[0])
                 i.append(j[3])
                 i.append(j[2])
